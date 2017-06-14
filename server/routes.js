@@ -1,4 +1,12 @@
 const User = require('./models/user');
+const jwt = require('jsonwebtoken');
+const secret = require('./config').secret;
+
+const generateToken = function(user) {
+  return jwt.sign(user, secret, {
+    expiresIn: 3000
+  })
+}
 
 module.exports = function(app) {
   app.post('/auth/login', function(req, res) {
@@ -8,7 +16,8 @@ module.exports = function(app) {
       user.comparePassword(req.body.password, function(err, isMatch) {
         if (!isMatch) { return res.status(403).json({msg: '密码错误！'}) }
         return res.json({
-          user: {name: user.username}        
+          token: generateToken({name: user.username}),
+          user: {name: user.username}
         });
       });
     });
