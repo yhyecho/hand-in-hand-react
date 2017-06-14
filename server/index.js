@@ -22,8 +22,8 @@ db.on('error', function(err) {
 db.once('open', function () {
   console.log('mongodb connect success');
   let user = new User({
-    username: 'echo666',
-    password: '666666666'
+    username: 'echo',
+    password: '123'
   });
   user.save();
 });

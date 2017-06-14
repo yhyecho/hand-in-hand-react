@@ -23,5 +23,12 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+UserSchema.methods.comparePassword = function(password, cb) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+    if (err) { return cb(err) }
+    cb(null, isMatch);
+  })
+}
+
 // mongoose会自动把User首字母转小写，并在数据库中生成users collections
 module.exports = mongoose.model('User', UserSchema);
