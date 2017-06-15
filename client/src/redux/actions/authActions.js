@@ -33,3 +33,12 @@ export function login(data) {
       });
   }
 }
+
+export function logout() {
+  return dispatch => {
+    sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('user');
+    dispatch(setCurrentUser({}));
+    browserHistory.push('/');
+  }
+}
