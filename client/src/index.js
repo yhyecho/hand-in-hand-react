@@ -1,4 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import App from './components/App';
 
-render(<h1>Hello React</h1>, document.getElementById('app'));
+injectTapEventPlugin();
+render(<App />, document.getElementById('app'));
