@@ -25,7 +25,7 @@ class Header extends Component {
         borderBottom: '1px solid #0079aa',
         height: '47px',
         paddingLeft: '16px',
-        paddingRight: '16px',
+        paddingRight: '40px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
@@ -36,6 +36,7 @@ class Header extends Component {
         fontWeight: '600',
         fontSize: '1em',
         textDecoration: 'none',
+        paddingLeft: '20px',
         ':hover': {
           cursor: 'pointer',
           textDecoration: 'underline'
@@ -52,6 +53,7 @@ class Header extends Component {
 
     const LoginLink = (
       <div>
+        <Link to='/signup' style={styles.nav}>注册</Link>
         <Link to='/login' style={styles.nav}>登录</Link>
       </div>
     );

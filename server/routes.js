@@ -9,6 +9,7 @@ const generateToken = function(user) {
 }
 
 module.exports = function(app) {
+  // 用户登录
   app.post('/auth/login', function(req, res) {
     User.findOne({ username: req.body.username }, function(err, user) {
       if (err) { return console.log(err); }
@@ -23,4 +24,22 @@ module.exports = function(app) {
       });
     });
   });
+  // 用户注册
+  app.post('/auth/signup', function(req, res) {
+    let user = new User();
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.save(function(err) {
+      if (err) {
+        console.log(err);
+        return res.status(403).json({msg: '创建用户失败！'})
+      }
+      return res.json({
+        token: generateToken({name: user.username}),
+        user: { name:user.username },
+        msg: '创建用户成功!'
+      })
+    });
+  })
+
 }

@@ -42,3 +42,20 @@ export function logout() {
     browserHistory.push('/');
   }
 }
+
+export function signup(data) {
+  return dispatch => {
+    axios.post(`${config.host}/auth/signup`, data)
+      .then(response => {
+        const token = response.data.token;
+        const user = response.data.user;
+        sessionStorage.setItem('jwtToken', token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        dispatch(setCurrentUser(user));
+        browserHistory.push('/');
+        console.log(response.data.msg);
+      }).catch(error => {
+        handleError(error);
+      });
+  }
+}

@@ -23,11 +23,6 @@ db.on('error', function(err) {
 });
 db.once('open', function () {
   console.log('mongodb connect success');
-  let user = new User({
-    username: 'echo',
-    password: '123'
-  });
-  user.save();
 });
 
 routes(app);
