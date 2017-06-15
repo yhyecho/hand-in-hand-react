@@ -24,6 +24,7 @@ class App extends Component {
       <StyleRoot>
         <div style={styles.root}>
           <Header />
+          { this.props.children }
         </div>
       </StyleRoot>
     );
