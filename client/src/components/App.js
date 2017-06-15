@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import RaisedButton from 'material-ui/RaisedButton';
+import Radium, { StyleRoot } from 'radium';
+import Header from './Header';
 
 class App extends Component {
   getChildContext() {
@@ -20,9 +21,11 @@ class App extends Component {
   render() {
     const styles = this.getStyles();
     return (
-      <div style={styles.root}>
-        <RaisedButton label='React 手牵手' primary={true} />
-      </div>
+      <StyleRoot>
+        <div style={styles.root}>
+          <Header />
+        </div>
+      </StyleRoot>
     );
   }
 }
@@ -31,4 +34,4 @@ App.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
 
-export default App;
+export default Radium(App);
