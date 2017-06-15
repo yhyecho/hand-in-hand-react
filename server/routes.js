@@ -17,7 +17,8 @@ module.exports = function(app) {
         if (!isMatch) { return res.status(403).json({msg: '密码错误！'}) }
         return res.json({
           token: generateToken({name: user.username}),
-          user: {name: user.username}
+          user: {name: user.username},
+          msg: '登录成功！'
         });
       });
     });

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Radium from 'radium';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions/authActions';
 
 class LogIn extends Component {
   getStyles() {
@@ -47,13 +48,7 @@ class LogIn extends Component {
     event.preventDefault();
     let username = this.refs.username.getValue();
     let password = this.refs.password.getValue();
-    axios.post('http://localhost:4000/auth/login', { username, password })
-    .then(response => {
-      console.log(response.data.token);
-    })
-    .catch(error => {
-      console.log(error.response.data.msg);
-    })
+    this.props.login({username, password});
   }
 
   render() {
@@ -70,4 +65,8 @@ class LogIn extends Component {
   }
 }
 
-export default Radium(LogIn);
+LogIn.propTypes = {
+  login: React.PropTypes.func.isRequired
+}
+
+export default connect(null, {login})(Radium(LogIn));
