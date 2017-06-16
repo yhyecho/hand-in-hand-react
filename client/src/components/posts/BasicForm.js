@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 
 class BasicForm extends Component {
+  getBasicFormInputValue() {
+    const name = this.refs.name.getValue();
+    const content = this.refs.content.getValue();
+    return { name, content };
+  }
+
   render() {
     let styles = {
       root: {
