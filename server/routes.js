@@ -1,4 +1,5 @@
 const User = require('./models/user');
+const Post = require('./models/post');
 const jwt = require('jsonwebtoken');
 const secret = require('./config').secret;
 
@@ -34,13 +35,31 @@ module.exports = function(app) {
     user.save(function(err) {
       if (err) {
         console.log(err);
-        return res.status(403).json({msg: '创建用户失败！'})
+        return res.status(403).json({msg: '创建用户失败！'});
       }
       return res.json({
         token: generateToken({name: user.username}),
         user: { name:user.username },
         msg: '创建用户成功!'
       })
+    });
+  })
+
+  // 创建文章
+  // 接口测试
+  // curl -H "Content-Type: application/json" -X POST -d '{"name":"前后端分离","content":"express+react+redux"}' http://localhost:4000/posts
+  app.post('/posts', function(req, res) {
+    let post = new Post();
+    post.name = req.body.name;
+    post.content = req.body.content;
+    post.save(function(err) {
+      if (err) {
+        console.log(err);
+        return res.status(403).json({msg: '创建文章失败！'});
+      }
+      res.json({
+        msg: '文章创建成功！'
+      });
     });
   })
 
