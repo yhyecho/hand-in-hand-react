@@ -9,6 +9,8 @@ const generateToken = function(user) {
   })
 }
 
+// 认证授权
+// curl -H "Content-Type: application/json" -H "Authorization: xxx.xxx.xxx" -X POST -d '{"name":"受保护接口","content":"protected api"}' http://localhost:4000/posts
 const requireAuth = function(req, res, next) {
   const token = req.headers.authorization;
   if (!token) {

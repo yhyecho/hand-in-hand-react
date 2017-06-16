@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class DashBoard extends Component {
   render() {
@@ -16,7 +18,9 @@ class DashBoard extends Component {
     return (
       <div style={styles.root}>
         <div style={styles.actions}>
-          管理员控制面板
+          <Link to='/posts/new'>
+            <RaisedButton label='添加新文章' primary={true} />
+          </Link>
         </div>
       </div>
     );

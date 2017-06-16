@@ -3,6 +3,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import App from './components/App';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
+import NewPost from './components/posts/NewPost';
 import DashBoard from './components/DashBoard';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
@@ -32,6 +33,7 @@ export const renderRoutes = () => (
         <Route path='/login' component={LogIn}/>
         <Route path='/signup' component={SignUp}/>
         <Route path='/dashboard' component={DashBoard} onEnter={requireAuth} />
+        <Route path='/posts/new' component={NewPost} onEnter={requireAuth} />
       </Route>
     </Router>
   </Provider>
