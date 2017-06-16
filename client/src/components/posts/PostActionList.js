@@ -50,7 +50,7 @@ class PostActionList extends Component {
           </Link>
         </div>
         <div style={styles.action}>
-          <Link to="/dashboard" style={styles.a}>
+          <Link to={`/posts/${this.props.post._id}`} style={styles.a}>
             <ActionLaunch color="#668eaa" style={styles.svg} />
             <span>查看</span>
           </Link>

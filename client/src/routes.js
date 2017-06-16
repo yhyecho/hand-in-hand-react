@@ -5,6 +5,7 @@ import LogIn from './components/LogIn';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import NewPost from './components/posts/NewPost';
+import ShowPost from './components/posts/ShowPost';
 import DashBoard from './components/DashBoard';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
@@ -36,6 +37,7 @@ export const renderRoutes = () => (
         <Route path='/signup' component={SignUp}/>
         <Route path='/dashboard' component={DashBoard} onEnter={requireAuth} />
         <Route path='/posts/new' component={NewPost} onEnter={requireAuth} />
+        <Route path='/posts/:postId' component={ShowPost} />
       </Route>
     </Router>
   </Provider>

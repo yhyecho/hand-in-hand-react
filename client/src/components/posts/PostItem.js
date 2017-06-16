@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Radium from 'radium';
 import { config } from '../../config';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import PostActionList from './PostActionList';
 
 class PostItem extends Component {
@@ -46,9 +47,9 @@ class PostItem extends Component {
           <img src={`${config.host}/uploads/covers/${this.props.post.cover}`} style={styles.image} />
         </div>
         <div style={styles.content}>
-          <div style={styles.name}>
+          <Link to={`/posts/${this.props.post._id}`} style={styles.name}>
             {this.props.post.name}
-          </div>
+          </Link>
         </div>
         { this.props.isAuthenticated && (this.props.user.admin === true) ? <PostActionList post={this.props.post} /> : '' }
       </div>

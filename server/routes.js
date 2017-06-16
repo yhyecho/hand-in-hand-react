@@ -106,4 +106,14 @@ module.exports = function(app) {
     })
   })
 
+  app.get('/posts/:postId', function(req, res) {
+    Post.findById({_id: req.params.postId}, function(err, post) {
+      if (err) {
+        // HTTP 状态码422（不可处理实体）意思是说服务器不能处理客户端的请求
+        return res.status(422).json({msg: "服务器繁忙！"});
+      }
+      res.json({ post: post });
+    })
+  })
+
 }
