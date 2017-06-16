@@ -1,7 +1,8 @@
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import App from './components/App';
 import LogIn from './components/LogIn';
+import Home from './components/Home';
 import SignUp from './components/SignUp';
 import NewPost from './components/posts/NewPost';
 import DashBoard from './components/DashBoard';
@@ -30,6 +31,7 @@ export const renderRoutes = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path='/' component={App}>
+        <IndexRoute component={Home} />
         <Route path='/login' component={LogIn}/>
         <Route path='/signup' component={SignUp}/>
         <Route path='/dashboard' component={DashBoard} onEnter={requireAuth} />

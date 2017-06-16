@@ -83,6 +83,7 @@ module.exports = function(app) {
         return res.status(403).json({msg: '创建文章失败！'});
       }
       res.json({
+        post: post,
         msg: '文章创建成功！'
       });
     });
