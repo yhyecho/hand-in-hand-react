@@ -68,6 +68,7 @@ class CoverImageUpload extends Component {
         this.setState({
           image: event.target.result,
         });
+        this.props.handleImage(file);
       }
       reader.readAsDataURL(file);
     }

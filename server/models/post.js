@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema(
   {
     name: { type: String },
-    content: { type: String }
+    content: { type: String },
+    cover: { type: String }
   },
   { timestamps: true }
 );

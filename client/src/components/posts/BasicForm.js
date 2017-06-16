@@ -6,7 +6,12 @@ class BasicForm extends Component {
   getBasicFormInputValue() {
     const name = this.refs.name.getValue();
     const content = this.refs.content.getValue();
-    return { name, content };
+    const file = this.state.file;
+    return { name, content, file };
+  }
+
+  getImage(file) {
+    this.setState({file: file});
   }
 
   render() {
@@ -29,7 +34,7 @@ class BasicForm extends Component {
         <div style={{marginTop: '15px', marginBottom: '15px'}}>
           <TextField floatingLabelText='内容' ref='content' multiLine={true} rows={5} style={styles.textField} />
         </div>
-        <CoverImageUpload tip='上传图片' />
+        <CoverImageUpload handleImage={this.getImage.bind(this)} tip='上传图片' />
       </div>
     );
   }

@@ -1,7 +1,10 @@
 const User = require('./models/user');
 const Post = require('./models/post');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const secret = require('./config').secret;
+
+const upload = multer({dest: './public/uploads/covers'});
 
 const generateToken = function(user) {
   return jwt.sign(user, secret, {
@@ -73,8 +76,11 @@ module.exports = function(app) {
   // 创建文章
   // 接口测试
   // curl -H "Content-Type: application/json" -X POST -d '{"name":"前后端分离","content":"express+react+redux"}' http://localhost:4000/posts
-  app.post('/posts', requireAuth, function(req, res) {
+  app.post('/posts', requireAuth, upload.single('post'), function(req, res) {
     let post = new Post();
+    if (req.file && req.file.filename) {
+      post.cover = req.file.filename;
+    }
     post.name = req.body.name;
     post.content = req.body.content;
     post.save(function(err) {
@@ -91,7 +97,7 @@ module.exports = function(app) {
 
   // 获取文章接口
   app.get('/posts', function(req, res) {
-    Post.find({}, 'name', function(err, posts) {
+    Post.find({}, 'name cover', function(err, posts) {
       if (err) return res.json({msg: '获取文章列表失败！'});
       res.json({
         posts: posts,
