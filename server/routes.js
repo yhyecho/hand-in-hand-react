@@ -9,6 +9,29 @@ const generateToken = function(user) {
   })
 }
 
+const requireAuth = function(req, res, next) {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(403).json({msg: '请提供认证码！'});
+  } else {
+    jwt.verify(token, secret, function(err, decoded) {
+      if (err) {
+        if (err.name === 'TokenExpiredError') {
+          return res.status(401).json({msg: 'token过期,请重新登录！'});
+        } else {
+          return res.status(401).json({msg: '认证失败！'});
+        }
+      } else {
+        if (decoded.admin === true) {
+          next();
+        } else {
+          return res.status(401).json({msg: '认证失败！'});
+        }
+      }
+    });
+  }
+}
+
 module.exports = function(app) {
   // 更新用户类型sql
   // db.users.update({username: 'trump'}, {$set: {admin: true}})
@@ -48,7 +71,7 @@ module.exports = function(app) {
   // 创建文章
   // 接口测试
   // curl -H "Content-Type: application/json" -X POST -d '{"name":"前后端分离","content":"express+react+redux"}' http://localhost:4000/posts
-  app.post('/posts', function(req, res) {
+  app.post('/posts', requireAuth, function(req, res) {
     let post = new Post();
     post.name = req.body.name;
     post.content = req.body.content;
