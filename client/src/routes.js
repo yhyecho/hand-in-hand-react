@@ -7,6 +7,7 @@ import SignUp from './components/SignUp';
 import NewPost from './components/posts/NewPost';
 import ShowPost from './components/posts/ShowPost';
 import DashBoard from './components/DashBoard';
+import EditPost from './components/posts/EditPost';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { setCurrentUser } from './redux/actions/authActions';
@@ -38,6 +39,7 @@ export const renderRoutes = () => (
         <Route path='/dashboard' component={DashBoard} onEnter={requireAuth} />
         <Route path='/posts/new' component={NewPost} onEnter={requireAuth} />
         <Route path='/posts/:postId' component={ShowPost} />
+        <Route path='/posts/:postId/edit' component={EditPost} onEnter={requireAuth} />
       </Route>
     </Router>
   </Provider>

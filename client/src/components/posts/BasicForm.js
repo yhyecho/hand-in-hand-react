@@ -30,11 +30,11 @@ class BasicForm extends Component {
     }
     return (
       <div style={styles.root}>
-        <TextField floatingLabelText='标题' ref='name' style={styles.textField} />
+        <TextField floatingLabelText='标题' ref='name' style={styles.textField} defaultValue={ this.props.post ? this.props.post.name : '' } />
         <div style={{marginTop: '15px', marginBottom: '15px'}}>
-          <TextField floatingLabelText='内容' ref='content' multiLine={true} rows={5} style={styles.textField} />
+          <TextField floatingLabelText='内容' ref='content' multiLine={true} rows={5} style={styles.textField} defaultValue={ this.props.post ? this.props.post.content : '' } />
         </div>
-        <CoverImageUpload handleImage={this.getImage.bind(this)} tip='上传图片' />
+        <CoverImageUpload handleImage={this.getImage.bind(this)} tip='上传图片' image={this.props.post ? this.props.post.cover : ''} />
       </div>
     );
   }

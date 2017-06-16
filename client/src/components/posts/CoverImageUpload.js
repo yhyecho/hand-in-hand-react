@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import { config } from '../../config';
 
 class CoverImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: ''
+      image: this.props.image ? `${config.host}/uploads/covers/${this.props.image}` : ''
     };
   }
 

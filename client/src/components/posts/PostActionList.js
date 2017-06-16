@@ -44,7 +44,7 @@ class PostActionList extends Component {
     return (
       <div style={styles.actions}>
         <div style={[styles.action, {borderLeft: 'none'}]}>
-          <Link to="/dashboard" style={styles.a}>
+          <Link to={`/posts/${this.props.post._id}/edit`} style={styles.a}>
             <EditorModeEdit color="#668eaa" style={styles.svg} />
             <span>编辑</span>
           </Link>
