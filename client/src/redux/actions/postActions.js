@@ -23,3 +23,14 @@ export function newPost(data) {
     });
   }
 }
+
+export function fetchPosts() {
+  return (dispatch) => {
+    axios.get(`${config.host}/posts`)
+      .then(response => {
+        dispatch({ type: 'LOAD_POSTS', posts: response.data.posts });
+      }).catch(error => {
+        handleError(error);
+      });
+  }
+}

@@ -89,4 +89,15 @@ module.exports = function(app) {
     });
   })
 
+  // 获取文章接口
+  app.get('/posts', function(req, res) {
+    Post.find({}, 'name', function(err, posts) {
+      if (err) return res.json({msg: '获取文章列表失败！'});
+      res.json({
+        posts: posts,
+        msg: '获取文章列表成功！'
+      });
+    })
+  })
+
 }
