@@ -9,6 +9,8 @@ const generateToken = function(user) {
 }
 
 module.exports = function(app) {
+  // 更新用户类型sql
+  // db.users.update({username: 'trump'}, {$set: {admin: true}})
   // 用户登录
   app.post('/auth/login', function(req, res) {
     User.findOne({ username: req.body.username }, function(err, user) {
@@ -17,8 +19,8 @@ module.exports = function(app) {
       user.comparePassword(req.body.password, function(err, isMatch) {
         if (!isMatch) { return res.status(403).json({msg: '密码错误！'}) }
         return res.json({
-          token: generateToken({name: user.username}),
-          user: {name: user.username},
+          token: generateToken({name: user.username, admin: user.admin}),
+          user: {name: user.username, admin: user.admin},
           msg: '登录成功！'
         });
       });

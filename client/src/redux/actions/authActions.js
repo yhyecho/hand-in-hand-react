@@ -26,7 +26,7 @@ export function login(data) {
         sessionStorage.setItem('jwtToken', token);
         sessionStorage.setItem('user', JSON.stringify(user));
         dispatch(setCurrentUser(user));
-        browserHistory.push('/');
+        user.admin === true ? browserHistory.push('/dashboard') : browserHistory.push('/');
         console.log(response.data.msg);
       }).catch(error => {
         handleError(error);
