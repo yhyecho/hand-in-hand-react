@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { config } from '../../config';
-import { getPost } from '../../redux/actions/postActions';
+import { getPost, clearPost } from '../../redux/actions/postActions';
 import isEmpty from 'lodash/fp/isEmpty';
 
 class ShowPost extends Component {
   componentWillMount() {
-      this.props.getPost(this.props.params.postId);
+    this.props.getPost(this.props.params.postId);
+  }
+
+  componentWillUnmount() {
+    this.props.clearPost();
   }
 
   render() {
@@ -57,4 +61,4 @@ const mapStateToProps = (state) => ({
   post: state.post
 })
 
-export default connect(mapStateToProps, { getPost })(ShowPost);
+export default connect(mapStateToProps, { getPost, clearPost })(ShowPost);

@@ -106,6 +106,7 @@ module.exports = function(app) {
     })
   })
 
+  // 获取单篇文章接口
   app.get('/posts/:postId', function(req, res) {
     Post.findById({_id: req.params.postId}, function(err, post) {
       if (err) {
@@ -115,5 +116,26 @@ module.exports = function(app) {
       res.json({ post: post });
     })
   })
+
+  // 更新文章接口
+  app.put('/posts/:postId', requireAuth, upload.single('post'), function(req, res) {
+    Post.findById({_id: req.params.postId}, function(err, post) {
+      if (err) {
+        return res.status(422).json({msg: '服务器繁忙！'});
+      }
+      post.name = req.body.name;
+      post.content = req.body.content;
+      if (req.file && req.file.filename) {
+        post.cover = req.file.filename;
+      }
+      post.save(function(err) {
+        if (err) return res.status(422).json({msg: '更新文章失败！'});
+        res.json({
+          post: post,
+          msg: '文章更新成功了！'
+        });
+      });
+    });
+  });
 
 }

@@ -10,6 +10,13 @@ class BasicForm extends Component {
     return { name, content, file };
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: ''
+    };
+  }
+
   getImage(file) {
     this.setState({file: file});
   }

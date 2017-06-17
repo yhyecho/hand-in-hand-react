@@ -3,11 +3,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import BasicForm from './BasicForm';
 import isEmpty from 'lodash/fp/isEmpty';
 import { connect } from 'react-redux';
-import { getPost } from '../../redux/actions/postActions';
+import { getPost, clearPost, editPost } from '../../redux/actions/postActions';
 
 class EditPost extends Component {
   componentWillMount() {
     this.props.getPost(this.props.params.postId);
+  }
+
+  componentWillUnmount() {
+    this.props.clearPost();
   }
 
   getStyles() {
@@ -30,7 +34,8 @@ class EditPost extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert('111');
+    const basic = this.refs.basic.getBasicFormInputValue();
+    this.props.editPost(basic, this.props.params.postId);
   }
 
   render() {
@@ -57,4 +62,4 @@ const mapStateToProps = (state) => ({
   post: state.post
 })
 
-export default connect(mapStateToProps, { getPost })(EditPost);
+export default connect(mapStateToProps, { getPost, clearPost, editPost })(EditPost);
