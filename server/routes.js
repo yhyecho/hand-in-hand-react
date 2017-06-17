@@ -95,7 +95,7 @@ module.exports = function(app) {
     });
   })
 
-  // 获取文章接口
+  // 获取所有文章接口
   app.get('/posts', function(req, res) {
     Post.find({}, 'name cover', function(err, posts) {
       if (err) return res.json({msg: '获取文章列表失败！'});
@@ -133,6 +133,19 @@ module.exports = function(app) {
         res.json({
           post: post,
           msg: '文章更新成功了！'
+        });
+      });
+    });
+  });
+
+  app.delete('/posts/:postId', requireAuth, function(req, res) {
+    const id = req.params.postId;
+    Post.findById({_id: id}, function(err, post) {
+      post.remove(function(err) {
+        if (err) return res.status(422).json({msg: '服务器繁忙！'});
+        res.json({
+          id: id,
+          msg: '文章删除成功！'
         });
       });
     });

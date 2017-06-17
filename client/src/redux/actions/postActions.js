@@ -71,3 +71,16 @@ export function editPost(data, id) {
     });
   }
 }
+
+export function deletePost(id) {
+  return (dispatch) => {
+    axios.delete(`${config.host}/posts/${id}`, {
+      headers: {'Authorization': sessionStorage.getItem('jwtToken')}
+    }).then(response => {
+      dispatch({ type: 'DELETE_POST', id: response.data.id })
+      console.log(response.data.msg);
+    }).catch(error => {
+      handleError(error);
+    });
+  }
+}
